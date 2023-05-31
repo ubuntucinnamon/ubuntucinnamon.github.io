@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Ubuntu Cinnamon Landing Page',
       theme: yaruLight,
       darkTheme: yaruDark,
       home: const HomePage(),

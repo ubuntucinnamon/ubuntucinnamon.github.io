@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:yaru/yaru.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,56 +34,27 @@ class _HomePageState extends State<HomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          const SliverAppBar(
-            pinned: true,
-            title: Text('Ubuntu Cinnamon'),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              Container(
-                color: YaruColors.porcelain,
-                child: const Text('Introducing Ubuntu Cinnamon Remix', style: TextStyle(color: YaruColors.textGrey)),
-                height: 100,
-              ),
-              Container(
-                color: Color(0xFFDD682A),
-                child: const Text('What is Ubuntu Cinnamon Remix?', style: TextStyle(color: YaruColors.textGrey)),
-                height: 50,
-              ),
-              Container(
-                color: YaruColors.porcelain,
-                child: const Text('Keep everything simple', style: TextStyle(color: YaruColors.textGrey)),
-                height: 100
-              ),
-              Container(
-                  color: Colors.white,
-                  child: const Text('Personalization', style: TextStyle(color: YaruColors.textGrey)),
-                  height: 100
-              ),
-              Container(
-                  color: YaruColors.porcelain,
-                  child: const Text('Cinnamon Spices', style: TextStyle(color: YaruColors.textGrey)),
-                  height: 100
-              ),
-              Container(
-                  color: Colors.white,
-                  child: const Text('Technology we use, featured in, etc.', style: TextStyle(color: YaruColors.textGrey)),
-                  height: 100
-              ),
-              Container(
-                  color: YaruColors.disabledGreyDark,
-                  child: const Text('Know More'),
-                  height: 200
-              ),
-            ]),
-          )
-        ],
-      ),
-      bottomNavigationBar: const BottomAppBar(
-        child: Text('Bottom app bar'),
-      ),
+        appBar: AppBar(title: Text("Ubuntu Cinnamon")),
+        body: Center(
+            child: YaruPage(children: [
+              Text(
+                  "As our website undergoes transfer to Canonical infrastructure, use *this* site for primary information.",
+                  textAlign: TextAlign.center),
+              Text(
+                  "For 22.04 'Jammy Jellyfish' LTS and point releases, refer to our sourceforge."),
+              Text(
+                  "For 23.04 'Lunar Lobster', refer to the Ubuntu CD Image mirror."),
+              TextButton(onPressed: () async {
+                launchUrl(
+                    Uri.parse("https://sourceforge.net/projects/ubuntu-cinnamon-remix/files/"));
+              }, child: Text('Sourceforge Link for 22.04.*')),
+              TextButton(onPressed: () async {
+                launchUrl(
+                    Uri.parse("http://cdimage.ubuntu.com/ubuntucinnamon/releases/lunar/release/"));
+              }, child: Text("Ubuntu CD Image Miror Link for 23.04"))
+            ],
+            )
+        )
     );
   }
 }
